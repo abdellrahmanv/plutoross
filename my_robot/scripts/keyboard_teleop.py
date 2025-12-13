@@ -64,6 +64,8 @@ class KeyboardTeleop(Node):
         """Main control loop"""
         while rclpy.ok():
             key = self.get_key()
+            if key:
+                key = key.lower()
             
             twist = Twist()
             arm_vel = Float64MultiArray()
@@ -102,6 +104,7 @@ class KeyboardTeleop(Node):
             elif key == ' ':
                 self.get_logger().info('STOP')
             elif key == '\x03':  # Ctrl+C
+                self.get_logger().info(f'Ignored key: {repr(key)}')
                 break
             else:
                 continue
