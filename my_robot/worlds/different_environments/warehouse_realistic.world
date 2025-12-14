@@ -1,0 +1,602 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="warehouse_world">
+
+    <plugin name="gazebo_ros_state" filename="libgazebo_ros_state.so">
+      <ros><namespace>/</namespace></ros>
+      <update_rate>1.0</update_rate>
+    </plugin>
+
+    <physics type="ode">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+      <gravity>0 0 -9.8</gravity>
+    </physics>
+
+    <scene>
+      <ambient>0.6 0.6 0.6 1</ambient>
+      <background>0.5 0.5 0.5 1</background>
+      <shadows>true</shadows>
+      <sky>
+        <clouds>
+          <speed>8</speed>
+        </clouds>
+      </sky>
+    </scene>
+
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+    <!-- Warehouse building -->
+    <include>
+      <uri>model://cafe</uri>
+      <name>warehouse_building</name>
+      <pose>0 0 0 0 0 0</pose>
+    </include>
+
+    <!-- Loading dock road -->
+    <model name="loading_dock_road">
+      <static>true</static>
+      <pose>0 -25 0.01 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box><size>15 50 0.01</size></box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>15 50 0.01</size></box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Road</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Warehouse concrete floor -->
+    <model name="warehouse_floor">
+      <static>true</static>
+      <link name="link">
+        <pose>0 0 0.02 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>70 70 0.01</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.3</mu>
+                <mu2>0.3</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>70 70 0.01</size></box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Concrete</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Storage Racks - Row 1 -->
+    <include>
+      <uri>model://bookshelf</uri>
+      <name>rack_1_1</name>
+      <pose>-20 -15 0 0 0 1.57</pose>
+    </include>
+
+    <include>
+      <uri>model://bookshelf</uri>
+      <name>rack_1_2</name>
+      <pose>-20 -10 0 0 0 1.57</pose>
+    </include>
+
+    <include>
+      <uri>model://bookshelf</uri>
+      <name>rack_1_3</name>
+      <pose>-20 -5 0 0 0 1.57</pose>
+    </include>
+
+    <include>
+      <uri>model://bookshelf</uri>
+      <name>rack_1_4</name>
+      <pose>-20 0 0 0 0 1.57</pose>
+    </include>
+
+    <include>
+      <uri>model://bookshelf</uri>
+      <name>rack_1_5</name>
+      <pose>-20 5 0 0 0 1.57</pose>
+    </include>
+
+    <!-- Storage Racks - Row 2 -->
+    <include>
+      <uri>model://bookshelf</uri>
+      <name>rack_2_1</name>
+      <pose>-10 -15 0 0 0 1.57</pose>
+    </include>
+
+    <include>
+      <uri>model://bookshelf</uri>
+      <name>rack_2_2</name>
+      <pose>-10 -10 0 0 0 1.57</pose>
+    </include>
+
+    <include>
+      <uri>model://bookshelf</uri>
+      <name>rack_2_3</name>
+      <pose>-10 -5 0 0 0 1.57</pose>
+    </include>
+
+    <include>
+      <uri>model://bookshelf</uri>
+      <name>rack_2_4</name>
+      <pose>-10 0 0 0 0 1.57</pose>
+    </include>
+
+    <include>
+      <uri>model://bookshelf</uri>
+      <name>rack_2_5</name>
+      <pose>-10 5 0 0 0 1.57</pose>
+    </include>
+
+    <!-- Storage Racks - Row 3 -->
+    <include>
+      <uri>model://bookshelf</uri>
+      <name>rack_3_1</name>
+      <pose>10 -15 0 0 0 -1.57</pose>
+    </include>
+
+    <include>
+      <uri>model://bookshelf</uri>
+      <name>rack_3_2</name>
+      <pose>10 -10 0 0 0 -1.57</pose>
+    </include>
+
+    <include>
+      <uri>model://bookshelf</uri>
+      <name>rack_3_3</name>
+      <pose>10 -5 0 0 0 -1.57</pose>
+    </include>
+
+    <include>
+      <uri>model://bookshelf</uri>
+      <name>rack_3_4</name>
+      <pose>10 0 0 0 0 -1.57</pose>
+    </include>
+
+    <include>
+      <uri>model://bookshelf</uri>
+      <name>rack_3_5</name>
+      <pose>10 5 0 0 0 -1.57</pose>
+    </include>
+
+    <!-- Storage Racks - Row 4 -->
+    <include>
+      <uri>model://bookshelf</uri>
+      <name>rack_4_1</name>
+      <pose>20 -15 0 0 0 -1.57</pose>
+    </include>
+
+    <include>
+      <uri>model://bookshelf</uri>
+      <name>rack_4_2</name>
+      <pose>20 -10 0 0 0 -1.57</pose>
+    </include>
+
+    <include>
+      <uri>model://bookshelf</uri>
+      <name>rack_4_3</name>
+      <pose>20 -5 0 0 0 -1.57</pose>
+    </include>
+
+    <include>
+      <uri>model://bookshelf</uri>
+      <name>rack_4_4</name>
+      <pose>20 0 0 0 0 -1.57</pose>
+    </include>
+
+    <include>
+      <uri>model://bookshelf</uri>
+      <name>rack_4_5</name>
+      <pose>20 5 0 0 0 -1.57</pose>
+    </include>
+
+    <!-- Pallets with boxes -->
+    <include>
+      <uri>model://cardboard_box</uri>
+      <name>pallet_1</name>
+      <pose>-15 10 0 0 0 0.3</pose>
+    </include>
+
+    <include>
+      <uri>model://cardboard_box</uri>
+      <name>pallet_2</name>
+      <pose>-5 10 0 0 0 -0.5</pose>
+    </include>
+
+    <include>
+      <uri>model://cardboard_box</uri>
+      <name>pallet_3</name>
+      <pose>5 10 0 0 0 0.7</pose>
+    </include>
+
+    <include>
+      <uri>model://cardboard_box</uri>
+      <name>pallet_4</name>
+      <pose>15 10 0 0 0 -0.8</pose>
+    </include>
+
+    <include>
+      <uri>model://cardboard_box</uri>
+      <name>pallet_5</name>
+      <pose>-15 15 0 0 0 1.2</pose>
+    </include>
+
+    <include>
+      <uri>model://cardboard_box</uri>
+      <name>pallet_6</name>
+      <pose>15 15 0 0 0 -1.1</pose>
+    </include>
+
+    <!-- Shipping containers -->
+    <include>
+      <uri>model://dumpster</uri>
+      <name>container_1</name>
+      <pose>-25 -20 0 0 0 1.57</pose>
+    </include>
+
+    <include>
+      <uri>model://dumpster</uri>
+      <name>container_2</name>
+      <pose>25 -20 0 0 0 1.57</pose>
+    </include>
+
+    <!-- Loading dock equipment -->
+    <include>
+      <uri>model://construction_barrel</uri>
+      <name>barrel_1</name>
+      <pose>-12 -20 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://construction_barrel</uri>
+      <name>barrel_2</name>
+      <pose>12 -20 0 0 0 0</pose>
+    </include>
+
+    <!-- Loading dock blocks -->
+    <include>
+      <uri>model://cinder_block</uri>
+      <name>dock_1</name>
+      <pose>-8 -22 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://cinder_block</uri>
+      <name>dock_2</name>
+      <pose>-4 -22 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://cinder_block</uri>
+      <name>dock_3</name>
+      <pose>4 -22 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://cinder_block</uri>
+      <name>dock_4</name>
+      <pose>8 -22 0 0 0 0</pose>
+    </include>
+
+    <!-- Office area tables -->
+    <include>
+      <uri>model://table</uri>
+      <name>office_desk_1</name>
+      <pose>0 18 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://table</uri>
+      <name>office_desk_2</name>
+      <pose>-5 18 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://table</uri>
+      <name>office_desk_3</name>
+      <pose>5 18 0 0 0 0</pose>
+    </include>
+
+    <!-- Office cabinets -->
+    <include>
+      <uri>model://cabinet</uri>
+      <name>file_cabinet_1</name>
+      <pose>-15 20 0 0 0 1.57</pose>
+    </include>
+
+    <include>
+      <uri>model://cabinet</uri>
+      <name>file_cabinet_2</name>
+      <pose>15 20 0 0 0 -1.57</pose>
+    </include>
+
+    <!-- Fire safety equipment -->
+    <include>
+      <uri>model://fire_hydrant</uri>
+      <name>fire_equipment_1</name>
+      <pose>-25 10 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://fire_hydrant</uri>
+      <name>fire_equipment_2</name>
+      <pose>25 10 0 0 0 0</pose>
+    </include>
+
+    <!-- GROUP 1: Loading dock workers (4 people) -->
+    <model name="dock_group_p1">
+      <static>true</static>
+      <pose>-8 -18 0.05 0 0 1.57</pose>
+      <include>
+        <uri>model://person_standing</uri>
+      </include>
+    </model>
+
+    <model name="dock_group_p2">
+      <static>true</static>
+      <pose>-4 -18 0.05 0 0 1.57</pose>
+      <include>
+        <uri>model://person_standing</uri>
+      </include>
+    </model>
+
+    <model name="dock_group_p3">
+      <static>true</static>
+      <pose>4 -18 0.05 0 0 1.57</pose>
+      <include>
+        <uri>model://person_standing</uri>
+      </include>
+    </model>
+
+    <model name="dock_group_p4">
+      <static>true</static>
+      <pose>8 -18 0.05 0 0 1.57</pose>
+      <include>
+        <uri>model://person_standing</uri>
+      </include>
+    </model>
+
+    <!-- GROUP 2: Rack area workers (4 people) -->
+    <model name="rack_group_p1">
+      <static>true</static>
+      <pose>-15 -12 0.05 0 0 0</pose>
+      <include>
+        <uri>model://person_standing</uri>
+      </include>
+    </model>
+
+    <model name="rack_group_p2">
+      <static>true</static>
+      <pose>-15 -2 0.05 0 0 0</pose>
+      <include>
+        <uri>model://person_standing</uri>
+      </include>
+    </model>
+
+    <model name="rack_group_p3">
+      <static>true</static>
+      <pose>15 -12 0.05 0 0 3.14</pose>
+      <include>
+        <uri>model://person_standing</uri>
+      </include>
+    </model>
+
+    <model name="rack_group_p4">
+      <static>true</static>
+      <pose>15 -2 0.05 0 0 3.14</pose>
+      <include>
+        <uri>model://person_standing</uri>
+      </include>
+    </model>
+
+    <!-- GROUP 3: Pallet area workers (4 people) -->
+    <model name="pallet_group_p1">
+      <static>true</static>
+      <pose>-15 12 0.05 0 0 -1.57</pose>
+      <include>
+        <uri>model://person_standing</uri>
+      </include>
+    </model>
+
+    <model name="pallet_group_p2">
+      <static>true</static>
+      <pose>-5 12 0.05 0 0 -1.57</pose>
+      <include>
+        <uri>model://person_standing</uri>
+      </include>
+    </model>
+
+    <model name="pallet_group_p3">
+      <static>true</static>
+      <pose>5 12 0.05 0 0 -1.57</pose>
+      <include>
+        <uri>model://person_standing</uri>
+      </include>
+    </model>
+
+    <model name="pallet_group_p4">
+      <static>true</static>
+      <pose>15 12 0.05 0 0 -1.57</pose>
+      <include>
+        <uri>model://person_standing</uri>
+      </include>
+    </model>
+
+    <!-- GROUP 4: Office staff (4 people) -->
+    <model name="office_group_p1">
+      <static>true</static>
+      <pose>0 16 0.05 0 0 1.57</pose>
+      <include>
+        <uri>model://person_standing</uri>
+      </include>
+    </model>
+
+    <model name="office_group_p2">
+      <static>true</static>
+      <pose>-5 16 0.05 0 0 1.57</pose>
+      <include>
+        <uri>model://person_standing</uri>
+      </include>
+    </model>
+
+    <model name="office_group_p3">
+      <static>true</static>
+      <pose>5 16 0.05 0 0 1.57</pose>
+      <include>
+        <uri>model://person_standing</uri>
+      </include>
+    </model>
+
+    <model name="office_group_p4">
+      <static>true</static>
+      <pose>-10 18 0.05 0 0 0</pose>
+      <include>
+        <uri>model://person_standing</uri>
+      </include>
+    </model>
+
+    <!-- Animated warehouse workers -->
+    <actor name="forklift_operator">
+      <pose>-15 -8 1.0 0 0 0</pose>
+      <skin>
+        <filename>walk.dae</filename>
+        <scale>1.0</scale>
+      </skin>
+      <animation name="walking">
+        <filename>walk.dae</filename>
+        <scale>1.0</scale>
+        <interpolate_x>true</interpolate_x>
+      </animation>
+      <script>
+        <loop>true</loop>
+        <auto_start>true</auto_start>
+        <trajectory id="0" type="walking">
+          <waypoint>
+            <time>0</time>
+            <pose>-15 -8 0 0 0 0</pose>
+          </waypoint>
+          <waypoint>
+            <time>4</time>
+            <pose>-15 8 0 0 0 0</pose>
+          </waypoint>
+          <waypoint>
+            <time>8</time>
+            <pose>15 8 0 0 0 1.57</pose>
+          </waypoint>
+          <waypoint>
+            <time>12</time>
+            <pose>15 -8 0 0 0 3.14</pose>
+          </waypoint>
+          <waypoint>
+            <time>16</time>
+            <pose>-15 -8 0 0 0 -1.57</pose>
+          </waypoint>
+        </trajectory>
+      </script>
+    </actor>
+
+    <actor name="inventory_clerk">
+      <pose>0 -15 1.0 0 0 1.57</pose>
+      <skin>
+        <filename>walk.dae</filename>
+        <scale>1.0</scale>
+      </skin>
+      <animation name="walking">
+        <filename>walk.dae</filename>
+        <scale>1.0</scale>
+        <interpolate_x>true</interpolate_x>
+      </animation>
+      <script>
+        <loop>true</loop>
+        <auto_start>true</auto_start>
+        <trajectory id="0" type="walking">
+          <waypoint>
+            <time>0</time>
+            <pose>0 -15 0 0 0 1.57</pose>
+          </waypoint>
+          <waypoint>
+            <time>5</time>
+            <pose>0 15 0 0 0 1.57</pose>
+          </waypoint>
+          <waypoint>
+            <time>10</time>
+            <pose>0 -15 0 0 0 -1.57</pose>
+          </waypoint>
+        </trajectory>
+      </script>
+    </actor>
+
+    <actor name="supervisor">
+      <pose>-10 10 1.0 0 0 0</pose>
+      <skin>
+        <filename>walk.dae</filename>
+        <scale>1.0</scale>
+      </skin>
+      <animation name="walking">
+        <filename>walk.dae</filename>
+        <scale>1.0</scale>
+        <interpolate_x>true</interpolate_x>
+      </animation>
+      <script>
+        <loop>true</loop>
+        <auto_start>true</auto_start>
+        <trajectory id="0" type="walking">
+          <waypoint>
+            <time>0</time>
+            <pose>-10 10 0 0 0 0</pose>
+          </waypoint>
+          <waypoint>
+            <time>3</time>
+            <pose>10 10 0 0 0 0</pose>
+          </waypoint>
+          <waypoint>
+            <time>6</time>
+            <pose>10 0 0 0 0 -1.57</pose>
+          </waypoint>
+          <waypoint>
+            <time>9</time>
+            <pose>-10 0 0 0 0 3.14</pose>
+          </waypoint>
+          <waypoint>
+            <time>12</time>
+            <pose>-10 10 0 0 0 1.57</pose>
+          </waypoint>
+        </trajectory>
+      </script>
+    </actor>
+
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+        <pose>-40 -50 35 0 0.6 1.57</pose>
+        <view_controller>orbit</view_controller>
+      </camera>
+    </gui>
+
+  </world>
+</sdf>

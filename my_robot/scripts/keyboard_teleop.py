@@ -24,7 +24,7 @@ class KeyboardTeleop(Node):
 
         self.linear_speed = 0.5  # m/s
         self.strafe_speed = 0.5  # m/s
-        self.angular_speed = 1.0  # rad/s
+        self.angular_speed = 2.5  # rad/s
         self.arm_speed = 1.0 # rad/s
 
         self.get_logger().info('Keyboard Teleop Started!')

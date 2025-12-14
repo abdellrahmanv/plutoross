@@ -1,0 +1,188 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="simple_indoor_house">
+    <!-- Physics settings for stability -->
+    <physics type="ode">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+
+    <!-- Light Source -->
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+    <!-- Ground Plane -->
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+
+    <!-- House Structure (Walls) -->
+    <model name="house_walls">
+      <static>true</static>
+      <link name="wall_link">
+        
+        <!-- Wall 1: Back Wall (10m long) -->
+        <visual name="wall_1_visual">
+          <pose>0 5 1.25 0 0 0</pose>
+          <geometry><box><size>10 0.2 2.5</size></box></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri><name>Gazebo/Grey</name></script></material>
+        </visual>
+        <collision name="wall_1_collision">
+          <pose>0 5 1.25 0 0 0</pose>
+          <geometry><box><size>10 0.2 2.5</size></box></geometry>
+        </collision>
+
+        <!-- Wall 2: Front Wall (with door gap) -->
+        <!-- Left segment -->
+        <visual name="wall_2a_visual">
+          <pose>-3 -5 1.25 0 0 0</pose>
+          <geometry><box><size>4 0.2 2.5</size></box></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri><name>Gazebo/Grey</name></script></material>
+        </visual>
+        <collision name="wall_2a_collision">
+          <pose>-3 -5 1.25 0 0 0</pose>
+          <geometry><box><size>4 0.2 2.5</size></box></geometry>
+        </collision>
+        <!-- Right segment -->
+        <visual name="wall_2b_visual">
+          <pose>3 -5 1.25 0 0 0</pose>
+          <geometry><box><size>4 0.2 2.5</size></box></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri><name>Gazebo/Grey</name></script></material>
+        </visual>
+        <collision name="wall_2b_collision">
+          <pose>3 -5 1.25 0 0 0</pose>
+          <geometry><box><size>4 0.2 2.5</size></box></geometry>
+        </collision>
+        <!-- Door lintel -->
+        <visual name="wall_2c_visual">
+          <pose>0 -5 2.25 0 0 0</pose>
+          <geometry><box><size>2 0.2 0.5</size></box></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri><name>Gazebo/Grey</name></script></material>
+        </visual>
+        <collision name="wall_2c_collision">
+          <pose>0 -5 2.25 0 0 0</pose>
+          <geometry><box><size>2 0.2 0.5</size></box></geometry>
+        </collision>
+
+        <!-- Wall 3: Left Wall -->
+        <visual name="wall_3_visual">
+          <pose>-5 0 1.25 0 0 0</pose>
+          <geometry><box><size>0.2 10.2 2.5</size></box></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri><name>Gazebo/Grey</name></script></material>
+        </visual>
+        <collision name="wall_3_collision">
+          <pose>-5 0 1.25 0 0 0</pose>
+          <geometry><box><size>0.2 10.2 2.5</size></box></geometry>
+        </collision>
+
+        <!-- Wall 4: Right Wall -->
+        <visual name="wall_4_visual">
+          <pose>5 0 1.25 0 0 0</pose>
+          <geometry><box><size>0.2 10.2 2.5</size></box></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri><name>Gazebo/Grey</name></script></material>
+        </visual>
+        <collision name="wall_4_collision">
+          <pose>5 0 1.25 0 0 0</pose>
+          <geometry><box><size>0.2 10.2 2.5</size></box></geometry>
+        </collision>
+
+        <!-- Interior Wall 1: Dividing Left and Right halves (partial) -->
+        <visual name="int_wall_1_visual">
+          <pose>0 1 1.25 0 0 0</pose>
+          <geometry><box><size>0.2 8 2.5</size></box></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri><name>Gazebo/Grey</name></script></material>
+        </visual>
+        <collision name="int_wall_1_collision">
+          <pose>0 1 1.25 0 0 0</pose>
+          <geometry><box><size>0.2 8 2.5</size></box></geometry>
+        </collision>
+
+        <!-- Interior Wall 2: Horizontal divider for top left room -->
+        <visual name="int_wall_2_visual">
+          <pose>-2.5 0 1.25 0 0 0</pose>
+          <geometry><box><size>5 0.2 2.5</size></box></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri><name>Gazebo/Grey</name></script></material>
+        </visual>
+        <collision name="int_wall_2_collision">
+          <pose>-2.5 0 1.25 0 0 0</pose>
+          <geometry><box><size>5 0.2 2.5</size></box></geometry>
+        </collision>
+        
+        <!-- Interior Wall 3: Horizontal divider for top right room -->
+        <visual name="int_wall_3_visual">
+          <pose>2.5 2 1.25 0 0 0</pose>
+          <geometry><box><size>5 0.2 2.5</size></box></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri><name>Gazebo/Grey</name></script></material>
+        </visual>
+        <collision name="int_wall_3_collision">
+          <pose>2.5 2 1.25 0 0 0</pose>
+          <geometry><box><size>5 0.2 2.5</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+
+    <!-- Furniture Placeholders -->
+    <!-- Table in Room 1 (Bottom Left) -->
+    <model name="table">
+      <static>true</static>
+      <pose>-2.5 -2.5 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry><box><size>1.5 0.8 1.0</size></box></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri><name>Gazebo/Wood</name></script></material>
+        </visual>
+        <collision name="collision">
+          <geometry><box><size>1.5 0.8 1.0</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+
+    <!-- Bed in Room 2 (Top Left) -->
+    <model name="bed">
+      <static>true</static>
+      <pose>-2.5 3.5 0.3 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry><box><size>1.2 2.0 0.6</size></box></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri><name>Gazebo/Blue</name></script></material>
+        </visual>
+        <collision name="collision">
+          <geometry><box><size>1.2 2.0 0.6</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+
+    <!-- Counter in Room 3 (Top Right) -->
+    <model name="counter">
+      <static>true</static>
+      <pose>2.5 4 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry><box><size>0.8 2.0 1.0</size></box></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri><name>Gazebo/White</name></script></material>
+        </visual>
+        <collision name="collision">
+          <geometry><box><size>0.8 2.0 1.0</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    
+    <!-- Sofa in Room 4 (Bottom Right) -->
+    <model name="sofa">
+      <static>true</static>
+      <pose>3.5 -2 0.4 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry><box><size>1.0 2.5 0.8</size></box></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri><name>Gazebo/Red</name></script></material>
+        </visual>
+        <collision name="collision">
+          <geometry><box><size>1.0 2.5 0.8</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+
+  </world>
+</sdf>

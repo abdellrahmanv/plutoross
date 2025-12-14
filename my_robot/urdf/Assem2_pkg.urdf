@@ -20,7 +20,7 @@
         xyz="0.00392777303738234 -0.000462430422751625 -0.137752360930799"
         rpy="0 0 0" />
       <mass
-        value="14.5955135474013" />
+        value="30.0" />
       <inertia
         ixx="0.426538617921406"
         ixy="-0.00157786653807191"
@@ -35,7 +35,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://my_robot/meshes/base_link.STL" />
+          filename="file:///home/nero/nero/my_robot/meshes/base_link.STL" />
       </geometry>
       <material
         name="">
@@ -49,7 +49,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://my_robot/meshes/base_link.STL" />
+          filename="file:///home/nero/nero/my_robot/meshes/base_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -75,7 +75,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://my_robot/meshes/front_rightwheel.STL" />
+          filename="file:///home/nero/nero/my_robot/meshes/front_rightwheel.STL" />
       </geometry>
       <material
         name="">
@@ -89,7 +89,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://my_robot/meshes/front_rightwheel.STL" />
+          filename="file:///home/nero/nero/my_robot/meshes/front_rightwheel.STL" />
       </geometry>
     </collision>
   </link>
@@ -128,7 +128,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://my_robot/meshes/front_leftwheel.STL" />
+          filename="file:///home/nero/nero/my_robot/meshes/front_leftwheel.STL" />
       </geometry>
       <material
         name="">
@@ -142,7 +142,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://my_robot/meshes/front_leftwheel.STL" />
+          filename="file:///home/nero/nero/my_robot/meshes/front_leftwheel.STL" />
       </geometry>
     </collision>
   </link>
@@ -181,7 +181,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://my_robot/meshes/back_rigtwheel.STL" />
+          filename="file:///home/nero/nero/my_robot/meshes/back_rigtwheel.STL" />
       </geometry>
       <material
         name="">
@@ -195,7 +195,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://my_robot/meshes/back_rigtwheel.STL" />
+          filename="file:///home/nero/nero/my_robot/meshes/back_rigtwheel.STL" />
       </geometry>
     </collision>
   </link>
@@ -234,7 +234,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://my_robot/meshes/back_leftwheel.STL" />
+          filename="file:///home/nero/nero/my_robot/meshes/back_leftwheel.STL" />
       </geometry>
       <material
         name="">
@@ -248,7 +248,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://my_robot/meshes/back_leftwheel.STL" />
+          filename="file:///home/nero/nero/my_robot/meshes/back_leftwheel.STL" />
       </geometry>
     </collision>
   </link>
@@ -287,7 +287,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://my_robot/meshes/leftarm.STL" />
+          filename="file:///home/nero/nero/my_robot/meshes/leftarm.STL" />
       </geometry>
       <material
         name="">
@@ -301,7 +301,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://my_robot/meshes/leftarm.STL" />
+          filename="file:///home/nero/nero/my_robot/meshes/leftarm.STL" />
       </geometry>
     </collision>
   </link>
@@ -342,7 +342,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://my_robot/meshes/rightarm.STL" />
+          filename="file:///home/nero/nero/my_robot/meshes/rightarm.STL" />
       </geometry>
       <material
         name="">
@@ -356,7 +356,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://my_robot/meshes/rightarm.STL" />
+          filename="file:///home/nero/nero/my_robot/meshes/rightarm.STL" />
       </geometry>
     </collision>
   </link>
@@ -374,6 +374,33 @@
       xyz="-0.066901 -0.99776 0" />
     <limit
       lower="-3.14" upper="3.14" effort="10.0" velocity="1.0" />
+  </joint>
+
+  <!-- LiDAR Sensor Link -->
+  <link name="lidar_link">
+    <visual>
+      <geometry>
+        <cylinder radius="0.05" length="0.06"/>
+      </geometry>
+      <material name="lidar_red">
+        <color rgba="0.8 0.0 0.0 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="0.05" length="0.06"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.2"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
+    </inertial>
+  </link>
+
+  <joint name="lidar_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="lidar_link"/>
+    <origin xyz="0 0 0.35" rpy="0 0 0"/>
   </joint>
 
   <gazebo>
@@ -397,4 +424,115 @@
       <joint_name>rightarmj</joint_name>
     </plugin>
   </gazebo>
+
+  <gazebo reference="lidar_link">
+    <material>Gazebo/Red</material>
+    <sensor name="lidar_sensor" type="ray">
+      <pose>0 0 0 0 0 0</pose>
+      <visualize>true</visualize>
+      <update_rate>10</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>360</samples>
+            <resolution>1</resolution>
+            <min_angle>-3.14159</min_angle>
+            <max_angle>3.14159</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.15</min>
+          <max>12.0</max>
+          <resolution>0.01</resolution>
+        </range>
+        <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.01</stddev>
+        </noise>
+      </ray>
+      <plugin name="scan" filename="libgazebo_ros_ray_sensor.so">
+        <ros>
+          <namespace>/</namespace>
+          <remapping>~/out:=scan</remapping>
+        </ros>
+        <output_type>sensor_msgs/LaserScan</output_type>
+        <frame_name>lidar_link</frame_name>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+  <!-- Simple Gazebo Effort Controller for Arms -->
+  <gazebo>
+    <plugin name='gazebo_ros_joint_pose_trajectory' filename='libgazebo_ros_joint_pose_trajectory.so'>
+      <ros>
+        <namespace>/</namespace>
+        <remapping>~/set_joint_trajectory:=set_joint_trajectory</remapping>
+      </ros>
+      <update_rate>100</update_rate>
+    </plugin>
+  </gazebo>
+
+
+  <!-- Camera Link -->
+  <link name="camera_link">
+    <visual>
+      <geometry>
+        <box size="0.03 0.08 0.03"/>
+      </geometry>
+      <material name="camera_black">
+        <color rgba="0.1 0.1 0.1 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.03 0.08 0.03"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.1"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
+    </inertial>
+  </link>
+
+  <joint name="camera_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="camera_link"/>
+    <origin xyz="0.15 0 0.25" rpy="0 0 0"/>
+  </joint>
+
+  <!-- Gazebo Camera Plugin -->
+  <gazebo reference="camera_link">
+    <sensor name="camera_sensor" type="camera">
+      <always_on>true</always_on>
+      <update_rate>30</update_rate>
+      <visualize>true</visualize>
+      <camera name="front_camera">
+        <horizontal_fov>1.3962634</horizontal_fov>
+        <image>
+          <width>640</width>
+          <height>480</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.02</near>
+          <far>300</far>
+        </clip>
+        <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.007</stddev>
+        </noise>
+      </camera>
+      <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+        <ros>
+          <namespace>/</namespace>
+          <remapping>~/image_raw:=camera/image_raw</remapping>
+          <remapping>~/camera_info:=camera/camera_info</remapping>
+        </ros>
+        <frame_name>camera_link</frame_name>
+      </plugin>
+    </sensor>
+  </gazebo>
+
 </robot>

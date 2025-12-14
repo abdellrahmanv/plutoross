@@ -1,0 +1,603 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="hospital_world">
+
+    <plugin name="gazebo_ros_state" filename="libgazebo_ros_state.so">
+      <ros><namespace>/</namespace></ros>
+      <update_rate>1.0</update_rate>
+    </plugin>
+
+    <physics type="ode">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+      <gravity>0 0 -9.8</gravity>
+    </physics>
+
+    <scene>
+      <ambient>0.8 0.8 0.8 1</ambient>
+      <background>0.8 0.9 1.0 1</background>
+      <shadows>true</shadows>
+      <sky>
+        <clouds>
+          <speed>10</speed>
+        </clouds>
+      </sky>
+    </scene>
+
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+    <!-- Hospital Building -->
+    <include>
+      <uri>model://cafe</uri>
+      <name>hospital_building</name>
+      <pose>0 0 0 0 0 0</pose>
+    </include>
+
+    <!-- Entrance road -->
+    <model name="entrance_road">
+      <static>true</static>
+      <pose>0 -20 0.01 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box><size>12 40 0.01</size></box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>12 40 0.01</size></box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Road</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Hospital floor -->
+    <model name="hospital_floor">
+      <static>true</static>
+      <link name="link">
+        <pose>0 0 0.02 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>50 50 0.01</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.3</mu>
+                <mu2>0.3</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>50 50 0.01</size></box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/White</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Oak trees around perimeter -->
+    <include>
+      <uri>model://oak_tree</uri>
+      <name>tree_1</name>
+      <pose>-20 -10 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://oak_tree</uri>
+      <name>tree_2</name>
+      <pose>20 -10 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://oak_tree</uri>
+      <name>tree_3</name>
+      <pose>-20 10 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://oak_tree</uri>
+      <name>tree_4</name>
+      <pose>20 10 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://oak_tree</uri>
+      <name>tree_5</name>
+      <pose>-20 0 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://oak_tree</uri>
+      <name>tree_6</name>
+      <pose>20 0 0 0 0 0</pose>
+    </include>
+
+    <!-- Nurses Station - Multiple desks in row -->
+    <include>
+      <uri>model://cafe_table</uri>
+      <name>nurses_desk_1</name>
+      <pose>-4 -8 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://cafe_table</uri>
+      <name>nurses_desk_2</name>
+      <pose>-2 -8 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://cafe_table</uri>
+      <name>nurses_desk_3</name>
+      <pose>0 -8 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://cafe_table</uri>
+      <name>nurses_desk_4</name>
+      <pose>2 -8 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://cafe_table</uri>
+      <name>nurses_desk_5</name>
+      <pose>4 -8 0 0 0 0</pose>
+    </include>
+
+    <!-- Medical examination tables -->
+    <include>
+      <uri>model://cafe_table</uri>
+      <name>exam_table_1</name>
+      <pose>-10 5 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://cafe_table</uri>
+      <name>exam_table_2</name>
+      <pose>10 5 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://cafe_table</uri>
+      <name>exam_table_3</name>
+      <pose>-10 -2 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://cafe_table</uri>
+      <name>exam_table_4</name>
+      <pose>10 -2 0 0 0 0</pose>
+    </include>
+
+    <!-- Waiting area tables -->
+    <include>
+      <uri>model://table</uri>
+      <name>waiting_table_1</name>
+      <pose>-8 10 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://table</uri>
+      <name>waiting_table_2</name>
+      <pose>8 10 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://table</uri>
+      <name>waiting_table_3</name>
+      <pose>0 12 0 0 0 0</pose>
+    </include>
+
+    <!-- Medical supply cabinets along walls -->
+    <include>
+      <uri>model://cabinet</uri>
+      <name>supply_cabinet_1</name>
+      <pose>-15 -8 0 0 0 1.57</pose>
+    </include>
+
+    <include>
+      <uri>model://cabinet</uri>
+      <name>supply_cabinet_2</name>
+      <pose>-15 -3 0 0 0 1.57</pose>
+    </include>
+
+    <include>
+      <uri>model://cabinet</uri>
+      <name>supply_cabinet_3</name>
+      <pose>-15 2 0 0 0 1.57</pose>
+    </include>
+
+    <include>
+      <uri>model://cabinet</uri>
+      <name>supply_cabinet_4</name>
+      <pose>15 -8 0 0 0 -1.57</pose>
+    </include>
+
+    <include>
+      <uri>model://cabinet</uri>
+      <name>supply_cabinet_5</name>
+      <pose>15 -3 0 0 0 -1.57</pose>
+    </include>
+
+    <include>
+      <uri>model://cabinet</uri>
+      <name>supply_cabinet_6</name>
+      <pose>15 2 0 0 0 -1.57</pose>
+    </include>
+
+    <!-- Medical records bookshelves -->
+    <include>
+      <uri>model://bookshelf</uri>
+      <name>records_shelf_1</name>
+      <pose>-15 8 0 0 0 1.57</pose>
+    </include>
+
+    <include>
+      <uri>model://bookshelf</uri>
+      <name>records_shelf_2</name>
+      <pose>-15 13 0 0 0 1.57</pose>
+    </include>
+
+    <include>
+      <uri>model://bookshelf</uri>
+      <name>records_shelf_3</name>
+      <pose>15 8 0 0 0 -1.57</pose>
+    </include>
+
+    <include>
+      <uri>model://bookshelf</uri>
+      <name>records_shelf_4</name>
+      <pose>15 13 0 0 0 -1.57</pose>
+    </include>
+
+    <!-- Medical equipment on stands -->
+    <include>
+      <uri>model://mailbox</uri>
+      <name>equipment_cart_1</name>
+      <pose>-12 -5 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://mailbox</uri>
+      <name>equipment_cart_2</name>
+      <pose>12 -5 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://mailbox</uri>
+      <name>equipment_cart_3</name>
+      <pose>-12 7 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://mailbox</uri>
+      <name>equipment_cart_4</name>
+      <pose>12 7 0 0 0 0</pose>
+    </include>
+
+    <!-- Medical waste containers -->
+    <include>
+      <uri>model://dumpster</uri>
+      <name>medical_waste_1</name>
+      <pose>-18 -12 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://dumpster</uri>
+      <name>medical_waste_2</name>
+      <pose>18 -12 0 0 0 0</pose>
+    </include>
+
+    <!-- Emergency equipment -->
+    <include>
+      <uri>model://fire_hydrant</uri>
+      <name>fire_extinguisher_1</name>
+      <pose>-10 -12 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://fire_hydrant</uri>
+      <name>fire_extinguisher_2</name>
+      <pose>10 -12 0 0 0 0</pose>
+    </include>
+
+    <!-- Medical supply boxes -->
+    <include>
+      <uri>model://cardboard_box</uri>
+      <name>supply_box_1</name>
+      <pose>-13 -6 0 0 0 0.4</pose>
+    </include>
+
+    <include>
+      <uri>model://cardboard_box</uri>
+      <name>supply_box_2</name>
+      <pose>13 -6 0 0 0 -0.6</pose>
+    </include>
+
+    <include>
+      <uri>model://cardboard_box</uri>
+      <name>supply_box_3</name>
+      <pose>-13 6 0 0 0 0.9</pose>
+    </include>
+
+    <include>
+      <uri>model://cardboard_box</uri>
+      <name>supply_box_4</name>
+      <pose>13 6 0 0 0 -0.9</pose>
+    </include>
+
+    <!-- GROUP 1: Waiting area patients (4 people) -->
+    <model name="waiting_group1_p1">
+      <static>true</static>
+      <pose>-8 8.5 0.05 0 0 -1.57</pose>
+      <include>
+        <uri>model://person_standing</uri>
+      </include>
+    </model>
+
+    <model name="waiting_group1_p2">
+      <static>true</static>
+      <pose>-9.5 10 0.05 0 0 -0.79</pose>
+      <include>
+        <uri>model://person_standing</uri>
+      </include>
+    </model>
+
+    <model name="waiting_group1_p3">
+      <static>true</static>
+      <pose>-6.5 10 0.05 0 0 -2.36</pose>
+      <include>
+        <uri>model://person_standing</uri>
+      </include>
+    </model>
+
+    <model name="waiting_group1_p4">
+      <static>true</static>
+      <pose>-8 11.5 0.05 0 0 3.14</pose>
+      <include>
+        <uri>model://person_standing</uri>
+      </include>
+    </model>
+
+    <!-- GROUP 2: Waiting area visitors (4 people) -->
+    <model name="waiting_group2_p1">
+      <static>true</static>
+      <pose>8 8.5 0.05 0 0 -1.57</pose>
+      <include>
+        <uri>model://person_standing</uri>
+      </include>
+    </model>
+
+    <model name="waiting_group2_p2">
+      <static>true</static>
+      <pose>9.5 10 0.05 0 0 -2.36</pose>
+      <include>
+        <uri>model://person_standing</uri>
+      </include>
+    </model>
+
+    <model name="waiting_group2_p3">
+      <static>true</static>
+      <pose>6.5 10 0.05 0 0 -0.79</pose>
+      <include>
+        <uri>model://person_standing</uri>
+      </include>
+    </model>
+
+    <model name="waiting_group2_p4">
+      <static>true</static>
+      <pose>8 11.5 0.05 0 0 3.14</pose>
+      <include>
+        <uri>model://person_standing</uri>
+      </include>
+    </model>
+
+    <!-- GROUP 3: Near examination area (4 people) -->
+    <model name="exam_group_p1">
+      <static>true</static>
+      <pose>-10 3.5 0.05 0 0 1.57</pose>
+      <include>
+        <uri>model://person_standing</uri>
+      </include>
+    </model>
+
+    <model name="exam_group_p2">
+      <static>true</static>
+      <pose>10 3.5 0.05 0 0 -1.57</pose>
+      <include>
+        <uri>model://person_standing</uri>
+      </include>
+    </model>
+
+    <model name="exam_group_p3">
+      <static>true</static>
+      <pose>-10 -4 0.05 0 0 1.57</pose>
+      <include>
+        <uri>model://person_standing</uri>
+      </include>
+    </model>
+
+    <model name="exam_group_p4">
+      <static>true</static>
+      <pose>10 -4 0.05 0 0 -1.57</pose>
+      <include>
+        <uri>model://person_standing</uri>
+      </include>
+    </model>
+
+    <!-- GROUP 4: Near nurses station (4 people) -->
+    <model name="reception_group_p1">
+      <static>true</static>
+      <pose>0 -10 0.05 0 0 1.57</pose>
+      <include>
+        <uri>model://person_standing</uri>
+      </include>
+    </model>
+
+    <model name="reception_group_p2">
+      <static>true</static>
+      <pose>-2 -10 0.05 0 0 1.57</pose>
+      <include>
+        <uri>model://person_standing</uri>
+      </include>
+    </model>
+
+    <model name="reception_group_p3">
+      <static>true</static>
+      <pose>2 -10 0.05 0 0 1.57</pose>
+      <include>
+        <uri>model://person_standing</uri>
+      </include>
+    </model>
+
+    <model name="reception_group_p4">
+      <static>true</static>
+      <pose>-4 -10 0.05 0 0 1.57</pose>
+      <include>
+        <uri>model://person_standing</uri>
+      </include>
+    </model>
+
+    <!-- Animated Actors -->
+    <actor name="doctor_1">
+      <pose>-5 0 1.0 0 0 0</pose>
+      <skin>
+        <filename>walk.dae</filename>
+        <scale>1.0</scale>
+      </skin>
+      <animation name="walking">
+        <filename>walk.dae</filename>
+        <scale>1.0</scale>
+        <interpolate_x>true</interpolate_x>
+      </animation>
+      <script>
+        <loop>true</loop>
+        <auto_start>true</auto_start>
+        <trajectory id="0" type="walking">
+          <waypoint>
+            <time>0</time>
+            <pose>-5 0 0 0 0 0</pose>
+          </waypoint>
+          <waypoint>
+            <time>5</time>
+            <pose>-5 10 0 0 0 0</pose>
+          </waypoint>
+          <waypoint>
+            <time>10</time>
+            <pose>5 10 0 0 0 1.57</pose>
+          </waypoint>
+          <waypoint>
+            <time>15</time>
+            <pose>5 0 0 0 0 3.14</pose>
+          </waypoint>
+          <waypoint>
+            <time>20</time>
+            <pose>-5 0 0 0 0 -1.57</pose>
+          </waypoint>
+        </trajectory>
+      </script>
+    </actor>
+
+    <actor name="nurse_1">
+      <pose>2 -5 1.0 0 0 1.57</pose>
+      <skin>
+        <filename>walk.dae</filename>
+        <scale>1.0</scale>
+      </skin>
+      <animation name="walking">
+        <filename>walk.dae</filename>
+        <scale>1.0</scale>
+        <interpolate_x>true</interpolate_x>
+      </animation>
+      <script>
+        <loop>true</loop>
+        <auto_start>true</auto_start>
+        <trajectory id="0" type="walking">
+          <waypoint>
+            <time>0</time>
+            <pose>2 -5 0 0 0 1.57</pose>
+          </waypoint>
+          <waypoint>
+            <time>4</time>
+            <pose>2 5 0 0 0 1.57</pose>
+          </waypoint>
+          <waypoint>
+            <time>8</time>
+            <pose>-8 5 0 0 0 3.14</pose>
+          </waypoint>
+          <waypoint>
+            <time>12</time>
+            <pose>-8 -5 0 0 0 -1.57</pose>
+          </waypoint>
+          <waypoint>
+            <time>16</time>
+            <pose>2 -5 0 0 0 0</pose>
+          </waypoint>
+        </trajectory>
+      </script>
+    </actor>
+
+    <actor name="patient_walking">
+      <pose>-2 8 1.0 0 0 0</pose>
+      <skin>
+        <filename>walk.dae</filename>
+        <scale>1.0</scale>
+      </skin>
+      <animation name="walking">
+        <filename>walk.dae</filename>
+        <scale>1.0</scale>
+        <interpolate_x>true</interpolate_x>
+      </animation>
+      <script>
+        <loop>true</loop>
+        <auto_start>true</auto_start>
+        <trajectory id="0" type="walking">
+          <waypoint>
+            <time>0</time>
+            <pose>-2 8 0 0 0 0</pose>
+          </waypoint>
+          <waypoint>
+            <time>3</time>
+            <pose>6 8 0 0 0 0</pose>
+          </waypoint>
+          <waypoint>
+            <time>6</time>
+            <pose>6 12 0 0 0 1.57</pose>
+          </waypoint>
+          <waypoint>
+            <time>9</time>
+            <pose>-2 12 0 0 0 3.14</pose>
+          </waypoint>
+          <waypoint>
+            <time>12</time>
+            <pose>-2 8 0 0 0 -1.57</pose>
+          </waypoint>
+        </trajectory>
+      </script>
+    </actor>
+
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+        <pose>-25 -35 25 0 0.6 1.57</pose>
+        <view_controller>orbit</view_controller>
+      </camera>
+    </gui>
+
+  </world>
+</sdf>
