@@ -14,5 +14,7 @@ install(PROGRAMS
   scripts/mecanum_controller.py
   scripts/keyboard_teleop.py
   scripts/mecanum_controller_complete.py
+  scripts/gazebo_mecanum_controller.py
+  scripts/gazebo_arm_controller.py
   DESTINATION lib/${PROJECT_NAME}
 )
